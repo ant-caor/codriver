@@ -1,21 +1,10 @@
 import * as React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
 import * as Components from '../components';
-
-const styles = StyleSheet.create({
-  list: {
-    width: '100%',
-  },
-  listContent: {
-    width: '100%',
-    paddingVertical: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
-  },
-});
 
 const Home: React.FunctionComponent = () => {
   const navigation = useNavigation();
@@ -50,10 +39,8 @@ const Home: React.FunctionComponent = () => {
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
-        <FlatList
-          style={styles.list}
-          contentContainerStyle={styles.listContent}
-          data={deliveries}
+        <Components.List
+          data={deliveries ? deliveries : []}
           renderItem={({item}) => renderDelivery(item)}
         />
       </Components.Section>
