@@ -54,7 +54,12 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
         <Components.Section
           title={'Active delivery'}
           titleTestId={Res.Constants.TestIds.Home.ActiveDeliverySectionTitle}>
-          <Components.Delivery delivery={activeDelivery} />
+          <Components.Delivery
+            delivery={activeDelivery}
+            handleTouchOnDelivery={() =>
+              handleTouchOnDelivery(activeDelivery.id)
+            }
+          />
         </Components.Section>
       )}
       <Components.Section
