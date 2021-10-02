@@ -1,24 +1,18 @@
-import * as React from 'react';
-import {Text, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import * as Res from '../res';
+import {Text} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: Res.Constants.Dimensions.SCREEN_PADDING,
-  },
-});
+import * as React from 'react';
+import * as Res from '../res';
+import * as Components from '../components';
 
 const DeliveryDetails = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text testID={Res.Constants.TestIds.DeliveryDetails.Title}>
-        Delivery Details Screen
-      </Text>
-    </SafeAreaView>
+    <Components.Screen>
+      <Components.Section
+        title={'Delivery details'}
+        titleTestId={Res.Constants.TestIds.DeliveryDetails.Title}>
+        <Text>Section content</Text>
+      </Components.Section>
+    </Components.Screen>
   );
 };
 

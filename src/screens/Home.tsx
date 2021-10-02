@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {FlatList, Text, StyleSheet} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 
 import * as Res from '../res';
@@ -9,11 +8,6 @@ import * as API from '../api';
 import * as Components from '../components';
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: Res.Constants.Dimensions.SCREEN_PADDING,
-  },
   deliveryTitle: {
     fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
   },
@@ -55,7 +49,7 @@ const Home: React.FunctionComponent = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Components.Screen>
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
@@ -66,7 +60,7 @@ const Home: React.FunctionComponent = () => {
           renderItem={({item}) => renderDelivery(item)}
         />
       </Components.Section>
-    </SafeAreaView>
+    </Components.Screen>
   );
 };
 
