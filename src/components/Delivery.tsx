@@ -27,15 +27,34 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
     }
   };
 
+  const getDeliveryIdString = (): string => {
+    return `Delivery #${props.delivery.id}`;
+  };
+
+  const getDeliveryCustomerString = (): string => {
+    return `Customer: ${props.delivery.customer}`;
+  };
+
+  const getDeliveryAddressString = (): string => {
+    return `${props.delivery.address}, ${props.delivery.address}`;
+  };
+
   return (
     <Components.Item handlePress={handleTouchOnDelivery}>
-      <Text style={styles.deliveryTitle}>Delivery #{props.delivery.id}</Text>
-      <Text style={styles.deliveryTextContent}>
-        Customer: {props.delivery.customer}
+      <Text
+        testID={Res.Constants.TestIds.Delivery.DeliveryId}
+        style={styles.deliveryTitle}>
+        {getDeliveryIdString()}
       </Text>
-      <Text style={styles.deliveryTextContent}>
-        {props.delivery.address}, {props.delivery.city},{' '}
-        {props.delivery.zipCode}
+      <Text
+        testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}
+        style={styles.deliveryTextContent}>
+        {getDeliveryCustomerString()}
+      </Text>
+      <Text
+        testID={Res.Constants.TestIds.Delivery.DeliveryAddress}
+        style={styles.deliveryTextContent}>
+        {getDeliveryAddressString()}
       </Text>
     </Components.Item>
   );
