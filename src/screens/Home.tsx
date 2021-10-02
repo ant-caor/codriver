@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FlatList, Text, View, StyleSheet} from 'react-native';
+import {FlatList, Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 
@@ -13,16 +13,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: Res.Constants.Dimensions.SCREEN_PADDING,
-  },
-  section: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
-    width: '100%',
-  },
-  sectionTitle: {
-    fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
-    fontWeight: 'bold',
   },
   deliveryTitle: {
     fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
@@ -66,19 +56,16 @@ const Home: React.FunctionComponent = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.section}>
-        <Text
-          testID={Res.Constants.TestIds.Home.DeliveriesSectionTitle}
-          style={styles.sectionTitle}>
-          Deliveries
-        </Text>
+      <Components.Section
+        title={'Deliveries'}
+        titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
         <FlatList
           style={styles.list}
           contentContainerStyle={styles.listContent}
           data={deliveries}
           renderItem={({item}) => renderDelivery(item)}
         />
-      </View>
+      </Components.Section>
     </SafeAreaView>
   );
 };
