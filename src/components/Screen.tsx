@@ -1,9 +1,10 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import * as Res from '../res';
+import * as Components from '../components';
 
 interface ScreenProps {
   children: React.ReactNode;
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
     padding: Res.Constants.Dimensions.SCREEN_PADDING,
   },
   backButton: {
-    marginBottom: Res.Constants.Dimensions.ITEM_PADDING,
+    marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
   },
 });
 
@@ -34,9 +35,9 @@ const Screen: React.FunctionComponent<ScreenProps | undefined> = (
   return (
     <SafeAreaView style={styles.container}>
       {props?.showBackButton === true && (
-        <TouchableOpacity style={styles.backButton} onPress={handlePressBack}>
-          <Text>Back</Text>
-        </TouchableOpacity>
+        <View style={styles.backButton}>
+          <Components.Button label={'Back'} handlePress={handlePressBack} />
+        </View>
       )}
       {props?.children}
     </SafeAreaView>
