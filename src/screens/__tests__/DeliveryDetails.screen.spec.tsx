@@ -12,5 +12,3 @@ describe('Delivery Details Screen', () => {
     ).toEqual('Delivery details');
   });
 });
-
-export {};
