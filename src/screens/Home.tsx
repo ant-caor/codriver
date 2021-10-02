@@ -6,13 +6,16 @@ import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
 import * as Components from '../components';
+import {useRecoilState} from 'recoil';
 
 type HomeProps = {
   stackProps?: NativeStackScreenProps<any>;
 };
 
 const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const [deliveries, setDeliveries] = React.useState<State.Models.Delivery[]>();
+  const [deliveries, setDeliveries] = useRecoilState(
+    State.Atoms.deliveriesState,
+  );
 
   React.useEffect(() => {
     API.Calls.getDeliveries().then(async response => {
@@ -20,7 +23,7 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
         setDeliveries(json);
       });
     });
-  }, []);
+  }, [setDeliveries]);
 
   const handleTouchOnDelivery = (id: string) => {
     props?.stackProps?.navigation?.navigate('DeliveryDetails', {id});
