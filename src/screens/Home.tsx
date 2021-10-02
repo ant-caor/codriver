@@ -1,6 +1,8 @@
 import * as React from 'react';
-import {FlatList, Text, View, StyleSheet} from 'react-native';
+import {FlatList, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
+
 import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
 });
 
 const Home: React.FunctionComponent = () => {
+  const navigation = useNavigation();
   const [deliveries, setDeliveries] = React.useState<State.Models.Delivery[]>();
 
   React.useEffect(() => {
@@ -60,15 +63,21 @@ const Home: React.FunctionComponent = () => {
     });
   }, []);
 
+  const handleTouchOnDelivery = () => {
+    navigation.navigate('DeliveryDetails');
+  };
+
   const renderDelivery = (
     delivery: State.Models.Delivery,
   ): React.ReactElement => {
     return (
-      <View style={[styles.card, styles.elevation]}>
+      <TouchableOpacity
+        style={[styles.card, styles.elevation]}
+        onPress={handleTouchOnDelivery}>
         <Text key={delivery.id} style={styles.deliveryTitle}>
           Delivery #{delivery.id}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
 
