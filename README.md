@@ -17,3 +17,9 @@ Execute the following command:
 ```bash
     $ yarn run ios
 ```
+
+## Run jest and react native testing library tests
+
+```bash
+    $ yarn run test
+```
