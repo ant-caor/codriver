@@ -12,7 +12,7 @@ type ButtonProps = {
 const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   const styles = StyleSheet.create({
     button: {
-      backgroundColor: '#0023',
+      backgroundColor: Res.Constants.Colors.Grey,
       paddingHorizontal: Res.Constants.Dimensions.BUTTON_HORIZONTAL_PADDING,
       paddingVertical: Res.Constants.Dimensions.BUTTON_VERTICAL_PADDING,
       borderRadius: Res.Constants.Dimensions.BUTTON_RADIUS,
