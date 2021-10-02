@@ -6,7 +6,7 @@ import * as Components from '../components';
 
 const DeliveryDetails = () => {
   return (
-    <Components.Screen>
+    <Components.Screen showBackButton={true}>
       <Components.Section
         title={'Delivery details'}
         titleTestId={Res.Constants.TestIds.DeliveryDetails.Title}>
