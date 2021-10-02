@@ -23,7 +23,11 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Deliveries</Text>
+        <Text
+          testID={Res.Constants.TestIds.Home.Title}
+          style={styles.sectionTitle}>
+          Deliveries
+        </Text>
       </View>
     </SafeAreaView>
   );

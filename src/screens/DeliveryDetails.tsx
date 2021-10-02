@@ -15,7 +15,9 @@ const styles = StyleSheet.create({
 const DeliveryDetails = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Delivery Details Screen</Text>
+      <Text testID={Res.Constants.TestIds.DeliveryDetails.Title}>
+        Delivery Details Screen
+      </Text>
     </SafeAreaView>
   );
 };

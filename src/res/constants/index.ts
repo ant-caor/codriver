@@ -1,3 +1,4 @@
 import Dimensions from './dimensions';
+import TestIds from './testIds';
 
-export {Dimensions};
+export {Dimensions, TestIds};
