@@ -1,4 +1,4 @@
-import getDeliveries from './getDeliveries';
-import finishDelivery from './finishDelivery';
+import * as Calls from './calls';
+import Config from './Config';
 
-export {getDeliveries, finishDelivery};
+export {Calls, Config};
