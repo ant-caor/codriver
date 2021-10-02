@@ -37,22 +37,27 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
 
   const handleMakeActive = () => {
     if (selectedDelivery !== null) {
-      setActiveDeliveryId(selectedDelivery.id);
-      if (props?.stackProps !== undefined) {
-        props?.stackProps?.navigation?.goBack();
+      if (activeDeliveryId === '') {
+        setActiveDeliveryId(selectedDelivery.id);
+        if (props?.stackProps !== undefined) {
+          props?.stackProps?.navigation?.goBack();
+        }
       }
     }
   };
 
   const getActions = () => {
     if (selectedDelivery?.id !== activeDeliveryId) {
-      return (
-        <Components.Button
-          label={'Make active'}
-          handlePress={handleMakeActive}
-          marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
-        />
-      );
+      if (activeDeliveryId === '') {
+        return (
+          <Components.Button
+            label={'Make active'}
+            handlePress={handleMakeActive}
+            marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+            backgroundColor={Res.Constants.Colors.Grey}
+          />
+        );
+      }
     } else {
       return (
         <View style={styles.actionsContainer}>
