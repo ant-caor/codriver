@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
     fontWeight: 'bold',
   },
+  freeSpace: {
+    height: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+  },
 });
 
 const Section: React.FunctionComponent<SectionProps> = (
@@ -27,9 +30,11 @@ const Section: React.FunctionComponent<SectionProps> = (
 ) => {
   return (
     <View style={styles.section}>
-      <Text testID={props.titleTestId} style={styles.sectionTitle}>
-        {props.title}
-      </Text>
+      <View style={styles.freeSpace}>
+        <Text testID={props.titleTestId} style={styles.sectionTitle}>
+          {props.title}
+        </Text>
+      </View>
       {props.children}
     </View>
   );
