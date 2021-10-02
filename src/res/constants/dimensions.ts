@@ -14,6 +14,8 @@ const Dimensions = {
   SHADOW_OFFSET_HEIGHT: 2,
   SHADOW_OPACITY: 0.2,
   SHADOW_RADIUS: 2,
+  BUTTON_HORIZONTAL_PADDING: 24,
+  BUTTON_VERTICAL_PADDING: 12,
 };
 
 export default Dimensions;
