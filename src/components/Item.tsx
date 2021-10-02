@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     padding: Res.Constants.Dimensions.ITEM_PADDING,
     marginBottom: Res.Constants.Dimensions.ITEM_BOTTOM_MARGIN,
     marginHorizontal: Res.Constants.Dimensions.ITEM_HOTIZONTAL_MARGIN,
-    width: '100%',
   },
   elevation: {
     shadowColor: '#000',
