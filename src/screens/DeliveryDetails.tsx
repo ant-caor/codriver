@@ -18,6 +18,9 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const selectedDelivery = useRecoilValue<State.Models.Delivery>(
     State.Selectors.selectedDeliveryState,
   );
+
+  const handleMakeActive = () => {};
+
   return (
     <Components.Screen stackProps={props.stackProps} showBackButton={true}>
       <Components.Section
@@ -32,6 +35,11 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
         <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryAddress}>
           {Utils.formatDeliveryAddress(selectedDelivery)}
         </Text>
+        <Components.Button
+          label={'Make active'}
+          handlePress={handleMakeActive}
+          marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+        />
       </Components.Section>
     </Components.Screen>
   );
