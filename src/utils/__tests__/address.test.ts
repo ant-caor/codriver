@@ -57,6 +57,6 @@ test('Address formatting for a delivery with the city but without address.', () 
 
 test('Address formatting for a delivery without address or city.', () => {
   expect(formatDeliveryAddress(mockWithoutAddressAndCity)).toBe(
-    'Unkown address.',
+    'Unknown address.',
   );
 });
