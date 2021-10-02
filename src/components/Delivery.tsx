@@ -28,10 +28,6 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
     }
   };
 
-  const getDeliveryIdString = (): string => {
-    return `Delivery #${props.delivery.id}`;
-  };
-
   const getDeliveryCustomerString = (): string => {
     return `Customer: ${props.delivery.customer}`;
   };
@@ -41,7 +37,7 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
       <Text
         testID={Res.Constants.TestIds.Delivery.DeliveryId}
         style={styles.deliveryTitle}>
-        {getDeliveryIdString()}
+        {Utils.formatDeliveryId(props.delivery)}
       </Text>
       <Text
         testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}
