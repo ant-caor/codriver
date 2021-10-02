@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {render} from '@testing-library/react-native';
 
-import DeliveryDetails from '../src/screens/DeliveryDetails';
-import {TestIds} from '../src/res/constants';
+import {TestIds} from '../../res/constants';
+import {DeliveryDetails} from '..';
 
 describe('Delivery Details Screen', () => {
   it('Shows deliveries details title correctly.', () => {

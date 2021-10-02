@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {render} from '@testing-library/react-native';
 
-import Home from '../src/screens/Home';
-import {TestIds} from '../src/res/constants';
+import {TestIds} from '../../res/constants';
+import {Home} from '..';
 
 describe('Home Screen', () => {
   it('Shows deliveries section title correctly.', () => {
