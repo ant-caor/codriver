@@ -6,6 +6,11 @@ const TestIds = {
   DeliveryDetails: {
     Title: 'DeliveryDetailsTitle',
   },
+  Delivery: {
+    DeliveryId: 'DeliveryId',
+    DeliveryCustomer: 'DeliveryCustomer',
+    DeliveryAddress: 'DeliveryAddress',
+  },
 };
 
 export default TestIds;
