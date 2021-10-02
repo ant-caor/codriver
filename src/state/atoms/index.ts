@@ -1,4 +1,5 @@
+import activeDeliveryIdState from './activeDeliveryId';
 import deliveriesState from './deliveries';
 import selectedDeliveryIdState from './selectedDeliveryId';
 
-export {deliveriesState, selectedDeliveryIdState};
+export {deliveriesState, selectedDeliveryIdState, activeDeliveryIdState};
