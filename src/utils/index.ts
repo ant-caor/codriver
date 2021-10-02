@@ -1,4 +1,5 @@
 import {formatDeliveryAddress} from './address';
+import formatDeliveryId from './deliveryIdFormatter';
 import {stringIsEmpty} from './string';
 
-export {formatDeliveryAddress, stringIsEmpty};
+export {formatDeliveryAddress, formatDeliveryId, stringIsEmpty};
