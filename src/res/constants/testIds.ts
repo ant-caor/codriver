@@ -5,6 +5,9 @@ const TestIds = {
   },
   DeliveryDetails: {
     Title: 'DeliveryDetailsTitle',
+    DeliveryId: 'DeliveryId',
+    DeliveryCustomer: 'DeliveryCustomer',
+    DeliveryAddress: 'DeliveryAddress',
   },
   Delivery: {
     DeliveryId: 'DeliveryId',

@@ -23,13 +23,13 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
       <Components.Section
         title={'Delivery details'}
         titleTestId={Res.Constants.TestIds.DeliveryDetails.Title}>
-        <Text testID={Res.Constants.TestIds.Delivery.DeliveryId}>
+        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryId}>
           {Utils.formatDeliveryId(selectedDelivery)}
         </Text>
-        <Text testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}>
+        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryCustomer}>
           {Utils.formatDeliveryCustomer(selectedDelivery)}
         </Text>
-        <Text testID={Res.Constants.TestIds.Delivery.DeliveryAddress}>
+        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryAddress}>
           {Utils.formatDeliveryAddress(selectedDelivery)}
         </Text>
       </Components.Section>
