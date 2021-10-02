@@ -5,9 +5,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 import * as Res from '../res';
 
-interface ScreenProps extends NativeStackScreenProps<any> {
+interface ScreenProps {
   children: React.ReactNode;
   showBackButton?: boolean;
+  stackProps?: NativeStackScreenProps<any>;
 }
 
 const styles = StyleSheet.create({
@@ -21,19 +22,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const Screen: React.FunctionComponent<ScreenProps> = (props: ScreenProps) => {
+const Screen: React.FunctionComponent<ScreenProps | undefined> = (
+  props: ScreenProps | undefined,
+) => {
   const handlePressBack = () => {
-    props.navigation.goBack();
+    props?.stackProps?.navigation?.goBack();
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {props.showBackButton === true && (
+      {props?.showBackButton === true && (
         <TouchableOpacity style={styles.backButton} onPress={handlePressBack}>
           <Text>Back</Text>
         </TouchableOpacity>
       )}
-      {props.children}
+      {props?.children}
     </SafeAreaView>
   );
 };
