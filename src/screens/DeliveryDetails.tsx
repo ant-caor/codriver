@@ -1,5 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useRecoilValue} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {Text} from 'react-native';
 
 import * as React from 'react';
@@ -15,26 +15,40 @@ type DeliveryDetailsProps = {
 const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   props: DeliveryDetailsProps,
 ) => {
-  const selectedDelivery = useRecoilValue<State.Models.Delivery>(
+  const selectedDelivery = useRecoilValue<State.Models.Delivery | null>(
     State.Selectors.selectedDeliveryState,
   );
+  const [, setActiveDeliveryId] = useRecoilState(
+    State.Atoms.activeDeliveryIdState,
+  );
 
-  const handleMakeActive = () => {};
+  const handleMakeActive = () => {
+    if (selectedDelivery !== null) {
+      setActiveDeliveryId(selectedDelivery.id);
+      props?.stackProps?.navigation?.goBack();
+    }
+  };
 
   return (
     <Components.Screen stackProps={props.stackProps} showBackButton={true}>
       <Components.Section
         title={'Delivery details'}
         titleTestId={Res.Constants.TestIds.DeliveryDetails.Title}>
-        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryId}>
-          {Utils.formatDeliveryId(selectedDelivery)}
-        </Text>
-        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryCustomer}>
-          {Utils.formatDeliveryCustomer(selectedDelivery)}
-        </Text>
-        <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryAddress}>
-          {Utils.formatDeliveryAddress(selectedDelivery)}
-        </Text>
+        {selectedDelivery !== null && (
+          <>
+            <Text testID={Res.Constants.TestIds.DeliveryDetails.DeliveryId}>
+              {Utils.formatDeliveryId(selectedDelivery)}
+            </Text>
+            <Text
+              testID={Res.Constants.TestIds.DeliveryDetails.DeliveryCustomer}>
+              {Utils.formatDeliveryCustomer(selectedDelivery)}
+            </Text>
+            <Text
+              testID={Res.Constants.TestIds.DeliveryDetails.DeliveryAddress}>
+              {Utils.formatDeliveryAddress(selectedDelivery)}
+            </Text>
+          </>
+        )}
         <Components.Button
           label={'Make active'}
           handlePress={handleMakeActive}
