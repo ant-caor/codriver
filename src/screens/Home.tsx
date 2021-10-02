@@ -20,7 +20,7 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
     State.Atoms.selectedDeliveryIdState,
   );
   const activeDelivery = useRecoilValue<State.Models.Delivery | null>(
-    State.Selectors.selectedDeliveryState,
+    State.Selectors.activeDeliveryState,
   );
 
   React.useEffect(() => {
