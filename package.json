@@ -41,6 +41,9 @@
   },
   "jest": {
     "preset": "react-native",
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!(@react-native|react-native|recoil)/)"
+    ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
     ],
