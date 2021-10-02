@@ -48,24 +48,25 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
     );
   };
 
+  const getHeader = (): React.ReactElement | undefined => {
+    if (activeDelivery !== null) {
+      return (
+        <Components.Delivery
+          delivery={activeDelivery}
+          handleTouchOnDelivery={() => handleTouchOnDelivery(activeDelivery.id)}
+        />
+      );
+    }
+    return undefined;
+  };
+
   return (
     <Components.Screen showBackButton={false} stackProps={props?.stackProps}>
-      {activeDelivery !== null && (
-        <Components.Section
-          title={'Active delivery'}
-          titleTestId={Res.Constants.TestIds.Home.ActiveDeliverySectionTitle}>
-          <Components.Delivery
-            delivery={activeDelivery}
-            handleTouchOnDelivery={() =>
-              handleTouchOnDelivery(activeDelivery.id)
-            }
-          />
-        </Components.Section>
-      )}
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
         <Components.List
+          header={getHeader()}
           data={deliveries ? deliveries : []}
           renderItem={({item}) => renderDelivery(item)}
         />
