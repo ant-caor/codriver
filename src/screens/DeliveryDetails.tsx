@@ -25,7 +25,9 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const handleMakeActive = () => {
     if (selectedDelivery !== null) {
       setActiveDeliveryId(selectedDelivery.id);
-      props?.stackProps?.navigation?.goBack();
+      if (props?.stackProps !== undefined) {
+        props?.stackProps?.navigation?.goBack();
+      }
     }
   };
 
