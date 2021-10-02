@@ -30,7 +30,9 @@ const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   });
 
   return (
-    <TouchableOpacity style={[styles.button, styles.elevation]}>
+    <TouchableOpacity
+      style={[styles.button, styles.elevation]}
+      onPress={props.handlePress}>
       <Text>{props.label}</Text>
     </TouchableOpacity>
   );
