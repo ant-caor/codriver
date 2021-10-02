@@ -28,10 +28,6 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
     }
   };
 
-  const getDeliveryCustomerString = (): string => {
-    return `Customer: ${props.delivery.customer}`;
-  };
-
   return (
     <Components.Item handlePress={handleTouchOnDelivery}>
       <Text
@@ -42,7 +38,7 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
       <Text
         testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}
         style={styles.deliveryTextContent}>
-        {getDeliveryCustomerString()}
+        {Utils.formatDeliveryCustomer(props.delivery)}
       </Text>
       <Text
         testID={Res.Constants.TestIds.Delivery.DeliveryAddress}
