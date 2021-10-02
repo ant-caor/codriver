@@ -12,5 +12,3 @@ describe('Home Screen', () => {
     ).toEqual('Deliveries');
   });
 });
-
-export {};
