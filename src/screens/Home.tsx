@@ -6,7 +6,7 @@ import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
 import * as Components from '../components';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 
 type HomeProps = {
   stackProps?: NativeStackScreenProps<any>;
@@ -18,6 +18,9 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
   );
   const [, setSelectedDeliveryId] = useRecoilState(
     State.Atoms.selectedDeliveryIdState,
+  );
+  const activeDelivery = useRecoilValue<State.Models.Delivery | null>(
+    State.Selectors.selectedDeliveryState,
   );
 
   React.useEffect(() => {
@@ -47,6 +50,13 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
 
   return (
     <Components.Screen showBackButton={false} stackProps={props?.stackProps}>
+      {activeDelivery !== null && (
+        <Components.Section
+          title={'Active delivery'}
+          titleTestId={Res.Constants.TestIds.Home.ActiveDeliverySectionTitle}>
+          <Components.Delivery delivery={activeDelivery} />
+        </Components.Section>
+      )}
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
