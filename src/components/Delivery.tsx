@@ -4,6 +4,7 @@ import {Text, StyleSheet} from 'react-native';
 import * as State from '../state';
 import * as Components from '../components';
 import * as Res from '../res';
+import * as Utils from '../utils';
 
 type DeliveryProps = {
   delivery: State.Models.Delivery;
@@ -35,10 +36,6 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
     return `Customer: ${props.delivery.customer}`;
   };
 
-  const getDeliveryAddressString = (): string => {
-    return `${props.delivery.address}, ${props.delivery.address}`;
-  };
-
   return (
     <Components.Item handlePress={handleTouchOnDelivery}>
       <Text
@@ -54,7 +51,7 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
       <Text
         testID={Res.Constants.TestIds.Delivery.DeliveryAddress}
         style={styles.deliveryTextContent}>
-        {getDeliveryAddressString()}
+        {Utils.formatDeliveryAddress(props.delivery)}
       </Text>
     </Components.Item>
   );
