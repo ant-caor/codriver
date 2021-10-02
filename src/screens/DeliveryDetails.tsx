@@ -18,7 +18,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const selectedDelivery = useRecoilValue<State.Models.Delivery | null>(
     State.Selectors.selectedDeliveryState,
   );
-  const [, setActiveDeliveryId] = useRecoilState(
+  const [activeDeliveryId, setActiveDeliveryId] = useRecoilState(
     State.Atoms.activeDeliveryIdState,
   );
 
@@ -51,11 +51,13 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
             </Text>
           </>
         )}
-        <Components.Button
-          label={'Make active'}
-          handlePress={handleMakeActive}
-          marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
-        />
+        {activeDeliveryId !== selectedDelivery?.id && (
+          <Components.Button
+            label={'Make active'}
+            handlePress={handleMakeActive}
+            marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+          />
+        )}
       </Components.Section>
     </Components.Screen>
   );
