@@ -1,3 +1,4 @@
 import Item from './Item';
+import Section from './Section';
 
-export {Item};
+export {Item, Section};
