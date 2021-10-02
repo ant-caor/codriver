@@ -9,22 +9,22 @@ type SectionProps = {
   children?: React.ReactNode;
 };
 
+const styles = StyleSheet.create({
+  section: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+    width: '100%',
+  },
+  sectionTitle: {
+    fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
+    fontWeight: 'bold',
+  },
+});
+
 const Section: React.FunctionComponent<SectionProps> = (
   props: SectionProps,
 ) => {
-  const styles = StyleSheet.create({
-    section: {
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
-      width: '100%',
-    },
-    sectionTitle: {
-      fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
-      fontWeight: 'bold',
-    },
-  });
-
   return (
     <View style={styles.section}>
       <Text testID={props.titleTestId} style={styles.sectionTitle}>
