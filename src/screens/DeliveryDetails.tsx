@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Text} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 import * as React from 'react';
 import * as Res from '../res';
@@ -11,6 +11,19 @@ import * as Utils from '../utils';
 type DeliveryDetailsProps = {
   stackProps?: NativeStackScreenProps<any>;
 };
+
+const styles = StyleSheet.create({
+  actionsContainer: {
+    marginTop: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+  },
+  actionsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+});
 
 const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   props: DeliveryDetailsProps,
@@ -28,6 +41,37 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
       if (props?.stackProps !== undefined) {
         props?.stackProps?.navigation?.goBack();
       }
+    }
+  };
+
+  const getActions = () => {
+    if (selectedDelivery?.id !== activeDeliveryId) {
+      return (
+        <Components.Button
+          label={'Make active'}
+          handlePress={handleMakeActive}
+          marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+        />
+      );
+    } else {
+      return (
+        <View style={styles.actionsContainer}>
+          <Text>Mark as:</Text>
+          <View style={styles.actionsRow}>
+            <Components.Button
+              label={'Undelivered'}
+              handlePress={handleMakeActive}
+              marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+            />
+            <Components.Button
+              label={'Delivered'}
+              backgroundColor={Res.Constants.Colors.Green}
+              handlePress={handleMakeActive}
+              marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+            />
+          </View>
+        </View>
+      );
     }
   };
 
@@ -51,13 +95,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
             </Text>
           </>
         )}
-        {activeDeliveryId !== selectedDelivery?.id && (
-          <Components.Button
-            label={'Make active'}
-            handlePress={handleMakeActive}
-            marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
-          />
-        )}
+        {getActions()}
       </Components.Section>
     </Components.Screen>
   );
