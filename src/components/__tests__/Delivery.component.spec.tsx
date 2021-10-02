@@ -4,6 +4,7 @@ import {render} from '@testing-library/react-native';
 import {TestIds} from '../../res/constants';
 import {Delivery} from '..';
 import * as State from '../../state';
+import * as Utils from '../../utils';
 
 describe('Delivery Component', () => {
   const mockDelivery: State.Models.Delivery = {
@@ -33,6 +34,6 @@ describe('Delivery Component', () => {
     const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
     expect(
       getByTestId(TestIds.Delivery.DeliveryAddress).children[0].valueOf(),
-    ).toEqual(`${mockDelivery.address}, ${mockDelivery.address}`);
+    ).toEqual(Utils.formatDeliveryAddress(mockDelivery));
   });
 });
