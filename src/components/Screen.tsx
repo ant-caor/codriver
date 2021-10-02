@@ -26,7 +26,9 @@ const Screen: React.FunctionComponent<ScreenProps | undefined> = (
   props: ScreenProps | undefined,
 ) => {
   const handlePressBack = () => {
-    props?.stackProps?.navigation?.goBack();
+    if (props?.stackProps !== undefined) {
+      props?.stackProps?.navigation?.goBack();
+    }
   };
 
   return (
