@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {FlatList, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {FlatList, Text, View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 
 import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
+import * as Components from '../components';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,22 +23,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
     fontWeight: 'bold',
-  },
-  card: {
-    backgroundColor: 'white',
-    borderRadius: Res.Constants.Dimensions.ITEM_RADIUS,
-    padding: Res.Constants.Dimensions.ITEM_PADDING,
-    marginBottom: Res.Constants.Dimensions.ITEM_BOTTOM_MARGIN,
-    marginHorizontal: Res.Constants.Dimensions.ITEM_HOTIZONTAL_MARGIN,
-  },
-  elevation: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: Res.Constants.Dimensions.SHADOW_OFFSET_WIDTH,
-      height: Res.Constants.Dimensions.SHADOW_OFFSET_HEIGHT,
-    },
-    shadowOpacity: Res.Constants.Dimensions.SHADOW_OPACITY,
-    shadowRadius: Res.Constants.Dimensions.SHADOW_RADIUS,
   },
   deliveryTitle: {
     fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
@@ -71,13 +56,11 @@ const Home: React.FunctionComponent = () => {
     delivery: State.Models.Delivery,
   ): React.ReactElement => {
     return (
-      <TouchableOpacity
-        style={[styles.card, styles.elevation]}
-        onPress={handleTouchOnDelivery}>
+      <Components.Item key={delivery.id} handlePress={handleTouchOnDelivery}>
         <Text key={delivery.id} style={styles.deliveryTitle}>
           Delivery #{delivery.id}
         </Text>
-      </TouchableOpacity>
+      </Components.Item>
     );
   };
 
