@@ -15,14 +15,37 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+    width: '100%',
   },
   sectionTitle: {
     fontSize: Res.Constants.Dimensions.TITLE_FONT_SIZE,
     fontWeight: 'bold',
   },
-  delivery: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+  card: {
+    backgroundColor: 'white',
+    borderRadius: Res.Constants.Dimensions.ITEM_RADIUS,
+    padding: Res.Constants.Dimensions.ITEM_PADDING,
+    marginBottom: Res.Constants.Dimensions.ITEM_BOTTOM_MARGIN,
+    marginHorizontal: Res.Constants.Dimensions.ITEM_HOTIZONTAL_MARGIN,
+  },
+  elevation: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: Res.Constants.Dimensions.SHADOW_OFFSET_WIDTH,
+      height: Res.Constants.Dimensions.SHADOW_OFFSET_HEIGHT,
+    },
+    shadowOpacity: Res.Constants.Dimensions.SHADOW_OPACITY,
+    shadowRadius: Res.Constants.Dimensions.SHADOW_RADIUS,
+  },
+  deliveryTitle: {
+    fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
+  },
+  list: {
+    width: '100%',
+  },
+  listContent: {
+    width: '100%',
+    paddingVertical: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
   },
 });
 
@@ -41,9 +64,9 @@ const Home: React.FunctionComponent = () => {
     delivery: State.Models.Delivery,
   ): React.ReactElement => {
     return (
-      <View style={styles.delivery}>
-        <Text key={delivery.id} style={styles.sectionTitle}>
-          {delivery.id}
+      <View style={[styles.card, styles.elevation]}>
+        <Text key={delivery.id} style={styles.deliveryTitle}>
+          Delivery #{delivery.id}
         </Text>
       </View>
     );
@@ -58,6 +81,8 @@ const Home: React.FunctionComponent = () => {
           Deliveries
         </Text>
         <FlatList
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
           data={deliveries}
           renderItem={({item}) => renderDelivery(item)}
         />
