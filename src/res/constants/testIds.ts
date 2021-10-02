@@ -1,9 +1,10 @@
 const TestIds = {
   Home: {
-    Title: 'TitleId',
+    ActiveDeliverySectionTitle: 'ActiveDeliverySectionTitle',
+    DeliveriesSectionTitle: 'DeliveriesSectionTitle',
   },
   DeliveryDetails: {
-    Title: 'TitleId',
+    Title: 'DeliveryDetailsTitle',
   },
 };
 

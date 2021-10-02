@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Home = () => {
+const Home: React.FunctionComponent = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.section}>
         <Text
-          testID={Res.Constants.TestIds.Home.Title}
+          testID={Res.Constants.TestIds.Home.DeliveriesSectionTitle}
           style={styles.sectionTitle}>
           Deliveries
         </Text>
