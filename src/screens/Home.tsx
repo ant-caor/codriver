@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {useNavigation} from '@react-navigation/native';
+
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
 import * as Components from '../components';
 
-const Home: React.FunctionComponent = () => {
-  const navigation = useNavigation();
+const Home: React.FunctionComponent<NativeStackScreenProps<any>> = (
+  props: NativeStackScreenProps<any>,
+) => {
   const [deliveries, setDeliveries] = React.useState<State.Models.Delivery[]>();
 
   React.useEffect(() => {
@@ -19,7 +21,7 @@ const Home: React.FunctionComponent = () => {
   }, []);
 
   const handleTouchOnDelivery = (id: string) => {
-    navigation.navigate('DeliveryDetails', {id});
+    props.navigation.navigate('DeliveryDetails', {id});
   };
 
   const renderDelivery = (
@@ -35,7 +37,7 @@ const Home: React.FunctionComponent = () => {
   };
 
   return (
-    <Components.Screen>
+    <Components.Screen navigation={props.navigation} route={props.route}>
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>

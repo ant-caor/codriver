@@ -1,14 +1,14 @@
-import {useNavigation} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import * as React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import * as Res from '../res';
 
-type ScreenProps = {
+interface ScreenProps extends NativeStackScreenProps<any> {
   children: React.ReactNode;
   showBackButton?: boolean;
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -22,10 +22,8 @@ const styles = StyleSheet.create({
 });
 
 const Screen: React.FunctionComponent<ScreenProps> = (props: ScreenProps) => {
-  const navigation = useNavigation();
-
   const handlePressBack = () => {
-    navigation.goBack();
+    props.navigation.goBack();
   };
 
   return (
