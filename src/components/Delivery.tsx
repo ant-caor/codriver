@@ -13,7 +13,9 @@ type DeliveryProps = {
 const styles = StyleSheet.create({
   deliveryTitle: {
     fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
+    fontWeight: 'bold',
   },
+  deliveryTextContent: {},
 });
 
 const Delivery: React.FunctionComponent<DeliveryProps> = (
@@ -27,8 +29,13 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
 
   return (
     <Components.Item handlePress={handleTouchOnDelivery}>
-      <Text key={props.delivery.id} style={styles.deliveryTitle}>
-        Delivery #{props.delivery.id}
+      <Text style={styles.deliveryTitle}>Delivery #{props.delivery.id}</Text>
+      <Text style={styles.deliveryTextContent}>
+        Customer: {props.delivery.customer}
+      </Text>
+      <Text style={styles.deliveryTextContent}>
+        {props.delivery.address}, {props.delivery.city},{' '}
+        {props.delivery.zipCode}
       </Text>
     </Components.Item>
   );
