@@ -20,14 +20,14 @@ describe('Delivery Component', () => {
     const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
     expect(
       getByTestId(TestIds.Delivery.DeliveryId).children[0].valueOf(),
-    ).toEqual(`Delivery #${mockDelivery.id}`);
+    ).toEqual(Utils.formatDeliveryId(mockDelivery));
   });
 
   it('Shows delivery customer information correctly.', () => {
     const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
     expect(
       getByTestId(TestIds.Delivery.DeliveryCustomer).children[0].valueOf(),
-    ).toEqual(`Customer: ${mockDelivery.customer}`);
+    ).toEqual(Utils.formatDeliveryCustomer(mockDelivery));
   });
 
   it('Shows delivery address information correctly.', () => {
