@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     width: '100%',
-    paddingVertical: Res.Constants.Dimensions.LIST_VERTICAL_PADDING,
+    paddingVertical: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
   },
 });
 
