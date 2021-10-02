@@ -18,8 +18,8 @@ const Home: React.FunctionComponent = () => {
     });
   }, []);
 
-  const handleTouchOnDelivery = () => {
-    navigation.navigate('DeliveryDetails');
+  const handleTouchOnDelivery = (id: string) => {
+    navigation.navigate('DeliveryDetails', {id});
   };
 
   const renderDelivery = (
@@ -29,7 +29,7 @@ const Home: React.FunctionComponent = () => {
       <Components.Delivery
         key={delivery.id}
         delivery={delivery}
-        handleTouchOnDelivery={handleTouchOnDelivery}
+        handleTouchOnDelivery={() => handleTouchOnDelivery(delivery.id)}
       />
     );
   };
