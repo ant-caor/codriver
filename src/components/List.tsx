@@ -6,11 +6,13 @@ import * as Res from '../res';
 interface ListProps<T> {
   data: T[];
   renderItem: ListRenderItem<T>;
+  header?: React.ReactElement;
 }
 
 const styles = StyleSheet.create({
   list: {
     width: '100%',
+    paddingHorizontal: 12,
   },
   listContent: {
     width: '100%',
@@ -25,6 +27,7 @@ const List = <T extends object>(props: ListProps<T>) => {
       contentContainerStyle={styles.listContent}
       data={props.data}
       renderItem={props.renderItem}
+      ListHeaderComponent={props.header}
     />
   );
 };
