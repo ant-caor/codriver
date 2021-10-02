@@ -14,4 +14,4 @@ const formatDeliveryAddress = (delivery: State.Models.Delivery): string => {
   return 'Unknown address.';
 };
 
-export {formatDeliveryAddress};
+export default formatDeliveryAddress;
