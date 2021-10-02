@@ -16,6 +16,9 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
   const [deliveries, setDeliveries] = useRecoilState(
     State.Atoms.deliveriesState,
   );
+  const [, setSelectedDeliveryId] = useRecoilState(
+    State.Atoms.selectedDeliveryIdState,
+  );
 
   React.useEffect(() => {
     API.Calls.getDeliveries().then(async response => {
@@ -26,6 +29,7 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
   }, [setDeliveries]);
 
   const handleTouchOnDelivery = (id: string) => {
+    setSelectedDeliveryId(id);
     props?.stackProps?.navigation?.navigate('DeliveryDetails', {id});
   };
 
