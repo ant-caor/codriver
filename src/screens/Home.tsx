@@ -13,14 +13,15 @@ type HomeProps = {
 };
 
 const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
-  const [deliveries, setDeliveries] = useRecoilState(
-    State.Atoms.deliveriesState,
-  );
+  const [, setDeliveries] = useRecoilState(State.Atoms.deliveriesState);
   const [, setSelectedDeliveryId] = useRecoilState(
     State.Atoms.selectedDeliveryIdState,
   );
   const activeDelivery = useRecoilValue<State.Models.Delivery | null>(
     State.Selectors.activeDeliveryState,
+  );
+  const unactiveDeliveries = useRecoilValue<State.Models.Delivery[] | null>(
+    State.Selectors.unactiveDeliveriesState,
   );
 
   React.useEffect(() => {
@@ -67,7 +68,7 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
         <Components.List
           header={getHeader()}
-          data={deliveries ? deliveries : []}
+          data={unactiveDeliveries ? unactiveDeliveries : []}
           renderItem={({item}) => renderDelivery(item)}
         />
       </Components.Section>
