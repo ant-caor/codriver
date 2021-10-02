@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FlatList, Text, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import * as Res from '../res';
@@ -8,9 +8,6 @@ import * as API from '../api';
 import * as Components from '../components';
 
 const styles = StyleSheet.create({
-  deliveryTitle: {
-    fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
-  },
   list: {
     width: '100%',
   },
@@ -40,11 +37,11 @@ const Home: React.FunctionComponent = () => {
     delivery: State.Models.Delivery,
   ): React.ReactElement => {
     return (
-      <Components.Item key={delivery.id} handlePress={handleTouchOnDelivery}>
-        <Text key={delivery.id} style={styles.deliveryTitle}>
-          Delivery #{delivery.id}
-        </Text>
-      </Components.Item>
+      <Components.Delivery
+        key={delivery.id}
+        delivery={delivery}
+        handleTouchOnDelivery={handleTouchOnDelivery}
+      />
     );
   };
 
