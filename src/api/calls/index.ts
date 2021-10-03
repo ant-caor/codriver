@@ -1,4 +1,4 @@
 import getDeliveries from './getDeliveries';
-import finishDelivery from './finishDelivery';
+import {finishDelivery, Status} from './finishDelivery';
 
-export {getDeliveries, finishDelivery};
+export {getDeliveries, finishDelivery, Status};

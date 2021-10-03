@@ -1,8 +1,13 @@
 import {Config} from '..';
 
+enum Status {
+  DELIVERED = 'DELIVERED',
+  UNDELIVERED = 'UNDELIVERED',
+}
+
 type FinishDeliveryParams = {
   deliveryId: string;
-  status: string;
+  status: Status;
   latitude: number;
   longitude: number;
 };
@@ -23,4 +28,4 @@ const finishDelivery = (params: FinishDeliveryParams) => {
   });
 };
 
-export default finishDelivery;
+export {finishDelivery, Status};
