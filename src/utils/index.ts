@@ -1,4 +1,5 @@
 import {requestAndroidLocationPermission} from './android';
+import {getDeliveredDeliveries, getUndeliveredDeliveries} from './deliveries';
 import formatDeliveryAddress from './deliveryAddressFormater';
 import formatDeliveryCustomer from './deliveryCustomerFormatter';
 import formatDeliveryId from './deliveryIdFormatter';
@@ -18,4 +19,6 @@ export {
   getDeviceLocation,
   locationIsValid,
   formatDriverLocation,
+  getUndeliveredDeliveries,
+  getDeliveredDeliveries,
 };
