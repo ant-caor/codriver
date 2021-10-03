@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 import openMap from 'react-native-open-maps';
 
 import * as React from 'react';
@@ -28,6 +28,17 @@ const styles = StyleSheet.create({
   },
   driverInformation: {
     marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+  },
+  imageContainer: {
+    marginVertical: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  imageStyle: {
+    width: 220,
+    height: 220,
+    borderRadius: Res.Constants.Dimensions.BUTTON_RADIUS,
   },
 });
 
@@ -162,6 +173,33 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
     }
   };
 
+  const getImage = () => {
+    if (selectedDelivery?.id === activeDeliveryId) {
+      return (
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.imageStyle}
+            source={require('../res/images/delivery_active.png')}
+          />
+        </View>
+      );
+    } else {
+      const isDelivered =
+        deliveredDeliveries.filter(dd => dd.deliveryId === selectedDelivery?.id)
+          ?.length > 0;
+      if (isDelivered) {
+        return (
+          <View style={styles.imageContainer}>
+            <Image
+              style={styles.imageStyle}
+              source={require('../res/images/delivery_delivered.png')}
+            />
+          </View>
+        );
+      }
+    }
+  };
+
   return (
     <Components.Screen stackProps={props.stackProps} showBackButton={true}>
       <Text style={styles.driverInformation}>
@@ -191,6 +229,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
         />
         {getActions()}
+        {getImage()}
       </Components.Section>
     </Components.Screen>
   );
