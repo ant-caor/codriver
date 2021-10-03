@@ -1,3 +1,4 @@
+import {requestAndroidLocationPermission} from './android';
 import formatDeliveryAddress from './deliveryAddressFormater';
 import formatDeliveryCustomer from './deliveryCustomerFormatter';
 import formatDeliveryId from './deliveryIdFormatter';
@@ -8,4 +9,5 @@ export {
   formatDeliveryCustomer,
   formatDeliveryId,
   stringIsEmpty,
+  requestAndroidLocationPermission,
 };
