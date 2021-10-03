@@ -111,6 +111,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
       selectedDelivery?.longitude !== undefined &&
       selectedDelivery?.latitude !== undefined
     ) {
+      // This will open the default device maps app centered with the selected delivery location.
       openMap({
         longitude: Number(selectedDelivery?.longitude),
         latitude: Number(selectedDelivery?.latitude),
@@ -122,6 +123,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const getActions = () => {
     if (selectedDelivery?.id !== activeDeliveryId) {
       if (activeDeliveryId === '') {
+        // If this delivery is not active and there is not any active delivery then we can activate it.
         return (
           <Components.Button
             label={'Make active'}
@@ -132,6 +134,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
         );
       }
     } else if (Utils.locationIsValid(userLocation)) {
+      // If selected delivery is active and the device location is valid then we can finish this delivery.
       return (
         <View style={styles.actionsContainer}>
           <Text>Mark as:</Text>
