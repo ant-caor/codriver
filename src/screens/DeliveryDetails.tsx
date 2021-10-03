@@ -123,15 +123,21 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const getActions = () => {
     if (selectedDelivery?.id !== activeDeliveryId) {
       if (activeDeliveryId === '') {
-        // If this delivery is not active and there is not any active delivery then we can activate it.
-        return (
-          <Components.Button
-            label={'Make active'}
-            handlePress={handleMakeActive}
-            marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
-            backgroundColor={Res.Constants.Colors.Grey}
-          />
-        );
+        const isDelivered =
+          deliveredDeliveries.filter(
+            dd => dd.deliveryId === selectedDelivery?.id,
+          )?.length > 0;
+        if (!isDelivered) {
+          // If this delivery is not delivered, is not active and there is not any active delivery then we can activate it.
+          return (
+            <Components.Button
+              label={'Make active'}
+              handlePress={handleMakeActive}
+              marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+              backgroundColor={Res.Constants.Colors.Grey}
+            />
+          );
+        }
       }
     } else if (Utils.locationIsValid(userLocation)) {
       // If selected delivery is active and the device location is valid then we can finish this delivery.
