@@ -93,12 +93,14 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
 
   return (
     <Components.Screen showBackButton={false} stackProps={props?.stackProps}>
-      <View style={styles.seeDeliveredContainer}>
-        <Components.Button
-          label={'See delivered deliveries'}
-          handlePress={seeDelivered}
-        />
-      </View>
+      {deliveredDeliveries?.length > 0 && (
+        <View style={styles.seeDeliveredContainer}>
+          <Components.Button
+            label={'See delivered deliveries'}
+            handlePress={seeDelivered}
+          />
+        </View>
+      )}
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
