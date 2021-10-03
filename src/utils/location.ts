@@ -49,4 +49,21 @@ const getDeviceLocation = (): Promise<Location> => {
   });
 };
 
-export default getDeviceLocation;
+const locationIsValid = (location: Location | undefined): boolean => {
+  return (
+    location?.latitude !== undefined &&
+    location?.latitude !== null &&
+    location?.longitude !== undefined &&
+    location?.longitude !== null
+  );
+};
+
+const formatDriverLocation = (location: Location | undefined): string => {
+  if (locationIsValid(location)) {
+    return `Driver location: (${location?.latitude},${location?.longitude}).`;
+  } else {
+    return 'Driver location unknown.';
+  }
+};
+
+export {getDeviceLocation, locationIsValid, formatDriverLocation};
