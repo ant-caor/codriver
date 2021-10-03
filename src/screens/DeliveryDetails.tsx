@@ -1,6 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Platform, Linking} from 'react-native';
+import openMap from 'react-native-open-maps';
 
 import * as React from 'react';
 import * as Res from '../res';
@@ -46,6 +47,23 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
     }
   };
 
+  const handleMarkAsUndelivered = () => {};
+
+  const handleMarkAsDelivered = () => {};
+
+  const handleOpenInMaps = () => {
+    if (
+      selectedDelivery?.longitude !== undefined &&
+      selectedDelivery?.latitude !== undefined
+    ) {
+      openMap({
+        longitude: Number(selectedDelivery?.longitude),
+        latitude: Number(selectedDelivery?.latitude),
+        zoom: 11,
+      });
+    }
+  };
+
   const getActions = () => {
     if (selectedDelivery?.id !== activeDeliveryId) {
       if (activeDeliveryId === '') {
@@ -65,13 +83,13 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           <View style={styles.actionsRow}>
             <Components.Button
               label={'Undelivered'}
-              handlePress={handleMakeActive}
+              handlePress={handleMarkAsUndelivered}
               marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
             />
             <Components.Button
               label={'Delivered'}
               backgroundColor={Res.Constants.Colors.Green}
-              handlePress={handleMakeActive}
+              handlePress={handleMarkAsDelivered}
               marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
             />
           </View>
@@ -100,6 +118,11 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
             </Text>
           </>
         )}
+        <Components.Button
+          label={'Open in maps'}
+          handlePress={handleOpenInMaps}
+          marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
+        />
         {getActions()}
       </Components.Section>
     </Components.Screen>
