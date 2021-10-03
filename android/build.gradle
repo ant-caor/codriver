@@ -7,6 +7,9 @@ buildscript {
         compileSdkVersion = 30
         targetSdkVersion = 30
         ndkVersion = "20.1.5948944"
+
+        // Necessary for react-native-geolocation-service.
+        googlePlayServicesVersion      = "17.0.0"
     }
     repositories {
         google()
