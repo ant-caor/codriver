@@ -72,7 +72,9 @@ const DeliveredDeliveries: React.FunctionComponent<DeliveredDeliveriesPros> = (
 
   return (
     <Components.Screen showBackButton={true} stackProps={props?.stackProps}>
-      <Components.Section title={'Delivered deliveries'}>
+      <Components.Section
+        title={'Delivered deliveries'}
+        titleTestId={Res.Constants.TestIds.DeliveredDeliveries.Title}>
         {isLoading && (
           <View style={styles.activityIndicatorContainer}>
             <ActivityIndicator />
