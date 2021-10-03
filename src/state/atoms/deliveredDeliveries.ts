@@ -4,7 +4,7 @@ import asyncStorageEffect from './effects/asyncStorageEffect';
 
 const deliveredDeliveriesState = atom({
   key: 'deliveredDeliveries',
-  default: [] as Models.Delivery[],
+  default: [] as Models.FinishedDelivery[],
   effects_UNSTABLE: [asyncStorageEffect('deliveredDeliveries')],
 });
 
