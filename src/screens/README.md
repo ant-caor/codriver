@@ -2,6 +2,8 @@
 
 This folder contains the Codriver app screens.
 
+To perform navigation across screens Codriver uses React Navigation (https://reactnavigation.org/).
+
 ## Screens
 
 - Home: This screen shows the deliveries for the driver. The driver can see if he/she has an active delivery at a glance.
