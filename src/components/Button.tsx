@@ -5,6 +5,7 @@ import * as Res from '../res';
 
 type ButtonProps = {
   label: string;
+  labelTestId?: string;
   handlePress: () => void;
   marginTop?: number;
   backgroundColor?: string;
@@ -36,7 +37,7 @@ const Button: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
     <TouchableOpacity
       style={[styles.button, styles.elevation]}
       onPress={props.handlePress}>
-      <Text>{props.label}</Text>
+      <Text testID={props.labelTestId}>{props.label}</Text>
     </TouchableOpacity>
   );
 };
