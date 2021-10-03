@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {render} from '@testing-library/react-native';
+import {RecoilRoot} from 'recoil';
 
 import {TestIds} from '../../res/constants';
 import {Delivery} from '..';
@@ -17,21 +18,33 @@ describe('Delivery Component', () => {
     customer: 'Peter Parker',
   };
   it('Shows delivery id correctly.', () => {
-    const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
+    const {getByTestId} = render(
+      <RecoilRoot>
+        <Delivery delivery={mockDelivery} />
+      </RecoilRoot>,
+    );
     expect(
       getByTestId(TestIds.Delivery.DeliveryId).children[0].valueOf(),
     ).toEqual(Utils.formatDeliveryId(mockDelivery));
   });
 
   it('Shows delivery customer information correctly.', () => {
-    const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
+    const {getByTestId} = render(
+      <RecoilRoot>
+        <Delivery delivery={mockDelivery} />
+      </RecoilRoot>,
+    );
     expect(
       getByTestId(TestIds.Delivery.DeliveryCustomer).children[0].valueOf(),
     ).toEqual(Utils.formatDeliveryCustomer(mockDelivery));
   });
 
   it('Shows delivery address information correctly.', () => {
-    const {getByTestId} = render(<Delivery delivery={mockDelivery} />);
+    const {getByTestId} = render(
+      <RecoilRoot>
+        <Delivery delivery={mockDelivery} />
+      </RecoilRoot>,
+    );
     expect(
       getByTestId(TestIds.Delivery.DeliveryAddress).children[0].valueOf(),
     ).toEqual(Utils.formatDeliveryAddress(mockDelivery));
