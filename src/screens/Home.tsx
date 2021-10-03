@@ -22,6 +22,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  seeDeliveredContainer: {
+    marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    width: '100%',
+  },
 });
 
 const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
@@ -87,15 +93,15 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
 
   return (
     <Components.Screen showBackButton={false} stackProps={props?.stackProps}>
-      <Components.Section
-        title={'Deliveries'}
-        titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
+      <View style={styles.seeDeliveredContainer}>
         <Components.Button
           label={'See delivered deliveries'}
           handlePress={seeDelivered}
-          marginTop={Res.Constants.Dimensions.BUTTON_VERTICAL_PADDING}
-          backgroundColor={Res.Constants.Colors.Blue}
         />
+      </View>
+      <Components.Section
+        title={'Deliveries'}
+        titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
         {isLoading && (
           <View style={styles.activityIndicatorContainer}>
             <ActivityIndicator />
