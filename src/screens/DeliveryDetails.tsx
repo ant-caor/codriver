@@ -9,6 +9,7 @@ import * as Components from '../components';
 import * as State from '../state';
 import * as Utils from '../utils';
 import * as API from '../api';
+import {FinishedDelivery} from '../state/models';
 
 type DeliveryDetailsProps = {
   stackProps?: NativeStackScreenProps<any>;
@@ -59,32 +60,34 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
     }
   };
 
-  const finishDelivery = (status: State.Models.FinishedDeliveryStatus) => {
-    if (Utils.locationIsValid(userLocation) && userLocation) {
-      console.log('Finishing delivery with status: ' + status);
-      API.Calls.finishDelivery({
-        deliveryId: activeDeliveryId,
-        status: status,
-        latitude: userLocation?.latitude,
-        longitude: userLocation?.longitude,
-      })
-        .then(finishedDelivery => {
-          console.log('Result: ' + JSON.stringify(finishedDelivery, null, 2));
+  const finishDelivery = (
+    status: State.Models.FinishedDeliveryStatus,
+  ): Promise<FinishedDelivery> => {
+    return new Promise<FinishedDelivery>((resolve, reject) => {
+      if (Utils.locationIsValid(userLocation) && userLocation) {
+        API.Calls.finishDelivery({
+          deliveryId: activeDeliveryId,
+          status: status,
+          latitude: userLocation?.latitude,
+          longitude: userLocation?.longitude,
         })
-        .catch(error => {
-          console.log(
-            `[DeliveryDetails screen] Error finishing delivery: ${JSON.stringify(
-              error,
-              null,
-              2,
-            )}`,
-          );
-        });
-    }
+          .then(finishedDelivery => {
+            resolve(finishedDelivery);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      } else {
+        reject(new Error('Location is not valid'));
+      }
+    });
   };
 
   const handleMarkAsUndelivered = () => {
-    finishDelivery(State.Models.FinishedDeliveryStatus.UNDELIVERED);
+    finishDelivery(State.Models.FinishedDeliveryStatus.UNDELIVERED).then(() => {
+      setActiveDeliveryId('');
+      props.stackProps?.navigation?.goBack();
+    });
   };
 
   const handleMarkAsDelivered = () => {
