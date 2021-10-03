@@ -1,5 +1,9 @@
 import {PermissionsAndroid, PermissionStatus} from 'react-native';
 
+/**
+ * A method to request access fine location. Only valid for Android.
+ * @returns a promise with the current Android access fine location permission status.
+ */
 const requestAndroidLocationPermission =
   (): Promise<PermissionStatus> | null => {
     try {
