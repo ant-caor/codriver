@@ -1,13 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {
-  Text,
-  View,
-  StyleSheet,
-  Platform,
-  PermissionsAndroid,
-} from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+import {Text, View, StyleSheet} from 'react-native';
 import openMap from 'react-native-open-maps';
 
 import * as React from 'react';
@@ -42,43 +35,13 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const [activeDeliveryId, setActiveDeliveryId] = useRecoilState(
     State.Atoms.activeDeliveryIdState,
   );
-  const [userLongitude, setUserLongitude] = React.useState<number>();
-  const [userLatitude, setUserLatitude] = React.useState<number>();
+  const [userLocation, setUserLocation] =
+    React.useState<{latitude: number; longitude: number}>();
 
   React.useEffect(() => {
-    if (Platform.OS === 'android') {
-      Utils.requestAndroidLocationPermission()?.then(status => {
-        if (status === PermissionsAndroid.RESULTS.GRANTED) {
-          Geolocation.getCurrentPosition(
-            position => {
-              setUserLongitude(position?.coords?.longitude);
-              setUserLatitude(position?.coords?.latitude);
-            },
-            error => {
-              // See error code charts below.
-              console.log(error.code, error.message);
-            },
-            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-          );
-        }
-      });
-    } else if (Platform.OS === 'ios') {
-      Geolocation.requestAuthorization('whenInUse').then(result => {
-        if (result === 'granted') {
-          Geolocation.getCurrentPosition(
-            position => {
-              setUserLongitude(position?.coords?.longitude);
-              setUserLatitude(position?.coords?.latitude);
-            },
-            error => {
-              // See error code charts below.
-              console.log(error.code, error.message);
-            },
-            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-          );
-        }
-      });
-    }
+    Utils.getDeviceLocation().then(location => {
+      setUserLocation(location);
+    });
   }, []);
 
   const handleMakeActive = () => {
@@ -168,8 +131,8 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           handlePress={handleOpenInMaps}
           marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
         />
-        <Text>User longitude: {userLongitude}</Text>
-        <Text>User latitude: {userLatitude}</Text>
+        <Text>User longitude: {userLocation?.longitude}</Text>
+        <Text>User latitude: {userLocation?.latitude}</Text>
         {getActions()}
       </Components.Section>
     </Components.Screen>
