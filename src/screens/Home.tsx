@@ -6,6 +6,8 @@ import * as Res from '../res';
 import * as State from '../state';
 import * as API from '../api';
 import * as Components from '../components';
+import * as Utils from '../utils';
+
 import {useRecoilState, useRecoilValue} from 'recoil';
 import {ActivityIndicator, View, StyleSheet} from 'react-native';
 
@@ -33,6 +35,9 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
   );
   const unactiveDeliveries = useRecoilValue<State.Models.Delivery[] | null>(
     State.Selectors.unactiveDeliveriesState,
+  );
+  const [deliveredDeliveries] = useRecoilState(
+    State.Atoms.deliveredDeliveriesState,
   );
 
   React.useEffect(() => {
@@ -76,11 +81,21 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
     return undefined;
   };
 
+  const seeDelivered = () => {
+    props?.stackProps?.navigation?.navigate('DeliveredDeliveries');
+  };
+
   return (
     <Components.Screen showBackButton={false} stackProps={props?.stackProps}>
       <Components.Section
         title={'Deliveries'}
         titleTestId={Res.Constants.TestIds.Home.DeliveriesSectionTitle}>
+        <Components.Button
+          label={'See delivered deliveries'}
+          handlePress={seeDelivered}
+          marginTop={Res.Constants.Dimensions.BUTTON_VERTICAL_PADDING}
+          backgroundColor={Res.Constants.Colors.Blue}
+        />
         {isLoading && (
           <View style={styles.activityIndicatorContainer}>
             <ActivityIndicator />
@@ -89,7 +104,14 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
         {!isLoading && (
           <Components.List
             header={getHeader()}
-            data={unactiveDeliveries ? unactiveDeliveries : []}
+            data={
+              unactiveDeliveries
+                ? Utils.getUndeliveredDeliveries(
+                    unactiveDeliveries,
+                    deliveredDeliveries,
+                  )
+                : []
+            }
             renderItem={({item}) => renderDelivery(item)}
           />
         )}
