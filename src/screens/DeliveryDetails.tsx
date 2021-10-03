@@ -40,6 +40,10 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const [activeDeliveryId, setActiveDeliveryId] = useRecoilState(
     State.Atoms.activeDeliveryIdState,
   );
+  const [deliveredDeliveries, setDeliveredDeliveries] = useRecoilState(
+    State.Atoms.deliveredDeliveriesState,
+  );
+
   const [userLocation, setUserLocation] =
     React.useState<{latitude: number; longitude: number}>();
 
@@ -91,7 +95,15 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   };
 
   const handleMarkAsDelivered = () => {
-    finishDelivery(State.Models.FinishedDeliveryStatus.DELIVERED);
+    finishDelivery(State.Models.FinishedDeliveryStatus.DELIVERED).then(
+      finishedDelivery => {
+        if (!deliveredDeliveries?.includes(finishedDelivery)) {
+          setDeliveredDeliveries([...deliveredDeliveries, finishedDelivery]);
+          setActiveDeliveryId('');
+          props.stackProps?.navigation?.goBack();
+        }
+      },
+    );
   };
 
   const handleOpenInMaps = () => {
