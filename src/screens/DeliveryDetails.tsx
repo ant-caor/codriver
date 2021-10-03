@@ -59,7 +59,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
     }
   };
 
-  const finishDelivery = (status: API.Calls.Status) => {
+  const finishDelivery = (status: State.Models.FinishedDeliveryStatus) => {
     if (Utils.locationIsValid(userLocation) && userLocation) {
       console.log('Finishing delivery with status: ' + status);
       API.Calls.finishDelivery({
@@ -68,23 +68,27 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
         latitude: userLocation?.latitude,
         longitude: userLocation?.longitude,
       })
-        .then(response => {
-          response.json().then(json => {
-            console.log('Result: ' + JSON.stringify(json, null, 2));
-          });
+        .then(finishedDelivery => {
+          console.log('Result: ' + JSON.stringify(finishedDelivery, null, 2));
         })
         .catch(error => {
-          console.log('Error: ' + JSON.stringify(error, null, 2));
+          console.log(
+            `[DeliveryDetails screen] Error finishing delivery: ${JSON.stringify(
+              error,
+              null,
+              2,
+            )}`,
+          );
         });
     }
   };
 
   const handleMarkAsUndelivered = () => {
-    finishDelivery(API.Calls.Status.UNDELIVERED);
+    finishDelivery(State.Models.FinishedDeliveryStatus.UNDELIVERED);
   };
 
   const handleMarkAsDelivered = () => {
-    finishDelivery(API.Calls.Status.DELIVERED);
+    finishDelivery(State.Models.FinishedDeliveryStatus.DELIVERED);
   };
 
   const handleOpenInMaps = () => {
