@@ -8,6 +8,7 @@ import * as Res from '../res';
 import * as Components from '../components';
 import * as State from '../state';
 import * as Utils from '../utils';
+import * as API from '../api';
 
 type DeliveryDetailsProps = {
   stackProps?: NativeStackScreenProps<any>;
@@ -58,9 +59,33 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
     }
   };
 
-  const handleMarkAsUndelivered = () => {};
+  const finishDelivery = (status: API.Calls.Status) => {
+    if (Utils.locationIsValid(userLocation) && userLocation) {
+      console.log('Finishing delivery with status: ' + status);
+      API.Calls.finishDelivery({
+        deliveryId: activeDeliveryId,
+        status: status,
+        latitude: userLocation?.latitude,
+        longitude: userLocation?.longitude,
+      })
+        .then(response => {
+          response.json().then(json => {
+            console.log('Result: ' + JSON.stringify(json, null, 2));
+          });
+        })
+        .catch(error => {
+          console.log('Error: ' + JSON.stringify(error, null, 2));
+        });
+    }
+  };
 
-  const handleMarkAsDelivered = () => {};
+  const handleMarkAsUndelivered = () => {
+    finishDelivery(API.Calls.Status.UNDELIVERED);
+  };
+
+  const handleMarkAsDelivered = () => {
+    finishDelivery(API.Calls.Status.DELIVERED);
+  };
 
   const handleOpenInMaps = () => {
     if (
