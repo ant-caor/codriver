@@ -87,7 +87,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           />
         );
       }
-    } else {
+    } else if (Utils.locationIsValid(userLocation)) {
       return (
         <View style={styles.actionsContainer}>
           <Text>Mark as:</Text>
@@ -112,8 +112,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   return (
     <Components.Screen stackProps={props.stackProps} showBackButton={true}>
       <Text style={styles.driverInformation}>
-        Current driver position: ({userLocation?.longitude},
-        {userLocation?.latitude})
+        {Utils.formatDriverLocation(userLocation)}
       </Text>
       <Components.Section
         title={'Delivery details'}
