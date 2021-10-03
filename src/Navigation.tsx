@@ -41,6 +41,16 @@ const Navigation = () => {
               />
             )}
           </Stack.Screen>
+          <Stack.Screen name={Res.Constants.Routes.DeliveredDeliveries}>
+            {props => (
+              <Screens.DeliveredDeliveries
+                stackProps={{
+                  navigation: props.navigation,
+                  route: props.route,
+                }}
+              />
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
