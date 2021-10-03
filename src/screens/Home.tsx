@@ -37,12 +37,14 @@ const Home: React.FunctionComponent<HomeProps> = (props: HomeProps) => {
 
   React.useEffect(() => {
     setLoading(true);
-    API.Calls.getDeliveries().then(async response => {
-      response.json().then((json: State.Models.Delivery[]) => {
-        setDeliveries(json);
+    API.Calls.getDeliveries()
+      .then(deliveries => {
+        setDeliveries(deliveries);
         setLoading(false);
-      });
-    });
+      })
+      .catch(err =>
+        console.log(`[Home screen] Error getting deliveries: ${err}`),
+      );
   }, [setDeliveries]);
 
   const handleTouchOnDelivery = (id: string) => {
