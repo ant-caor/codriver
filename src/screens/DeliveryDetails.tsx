@@ -1,6 +1,12 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Text, View, StyleSheet, PermissionsAndroid} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Platform,
+  PermissionsAndroid,
+} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import openMap from 'react-native-open-maps';
 
@@ -40,21 +46,39 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const [userLatitude, setUserLatitude] = React.useState<number>();
 
   React.useEffect(() => {
-    Utils.requestAndroidLocationPermission()?.then(status => {
-      if (status === PermissionsAndroid.RESULTS.GRANTED) {
-        Geolocation.getCurrentPosition(
-          position => {
-            setUserLongitude(position?.coords?.longitude);
-            setUserLatitude(position?.coords?.latitude);
-          },
-          error => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-          },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
-      }
-    });
+    if (Platform.OS === 'android') {
+      Utils.requestAndroidLocationPermission()?.then(status => {
+        if (status === PermissionsAndroid.RESULTS.GRANTED) {
+          Geolocation.getCurrentPosition(
+            position => {
+              setUserLongitude(position?.coords?.longitude);
+              setUserLatitude(position?.coords?.latitude);
+            },
+            error => {
+              // See error code charts below.
+              console.log(error.code, error.message);
+            },
+            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+          );
+        }
+      });
+    } else if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization('whenInUse').then(result => {
+        if (result === 'granted') {
+          Geolocation.getCurrentPosition(
+            position => {
+              setUserLongitude(position?.coords?.longitude);
+              setUserLatitude(position?.coords?.latitude);
+            },
+            error => {
+              // See error code charts below.
+              console.log(error.code, error.message);
+            },
+            {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+          );
+        }
+      });
+    }
   }, []);
 
   const handleMakeActive = () => {
