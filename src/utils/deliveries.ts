@@ -1,9 +1,9 @@
 import * as State from '../state';
 
-const getUndeliveredDeliveries = (
+const getUndeliveredDeliveryIds = (
   deliveries: State.Models.Delivery[],
   deliveredDeliveries: State.Models.FinishedDelivery[],
-): State.Models.Delivery[] => {
+) => {
   const deliveryIds: string[] = Array.from(deliveries, d => d.id);
   const deliveredDeliveryIds: string[] = Array.from(
     deliveredDeliveries,
@@ -12,22 +12,29 @@ const getUndeliveredDeliveries = (
   const undeliveredDeliveryIds = deliveryIds.filter(d =>
     deliveredDeliveryIds.includes(d),
   );
-  return deliveries.filter(d => !undeliveredDeliveryIds.includes(d.id));
+
+  return undeliveredDeliveryIds;
+};
+
+const getUndeliveredDeliveries = (
+  deliveries: State.Models.Delivery[],
+  deliveredDeliveries: State.Models.FinishedDelivery[],
+): State.Models.Delivery[] => {
+  return deliveries.filter(
+    d =>
+      !getUndeliveredDeliveryIds(deliveries, deliveredDeliveries).includes(
+        d.id,
+      ),
+  );
 };
 
 const getDeliveredDeliveries = (
   deliveries: State.Models.Delivery[],
   deliveredDeliveries: State.Models.FinishedDelivery[],
 ): State.Models.Delivery[] => {
-  const deliveryIds: string[] = Array.from(deliveries, d => d.id);
-  const deliveredDeliveryIds: string[] = Array.from(
-    deliveredDeliveries,
-    dd => dd.deliveryId,
+  return deliveries.filter(d =>
+    getUndeliveredDeliveryIds(deliveries, deliveredDeliveries).includes(d.id),
   );
-  const undeliveredDeliveryIds = deliveryIds.filter(d =>
-    deliveredDeliveryIds.includes(d),
-  );
-  return deliveries.filter(d => undeliveredDeliveryIds.includes(d.id));
 };
 
 export {getUndeliveredDeliveries, getDeliveredDeliveries};
