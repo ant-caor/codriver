@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: Res.Constants.Dimensions.SHADOW_OPACITY,
     shadowRadius: Res.Constants.Dimensions.SHADOW_RADIUS,
+    elevation: 5,
   },
 });
 
