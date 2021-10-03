@@ -1,6 +1,7 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useRecoilState, useRecoilValue} from 'recoil';
-import {Text, View, StyleSheet, Platform, Linking} from 'react-native';
+import {Text, View, StyleSheet, PermissionsAndroid} from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 import openMap from 'react-native-open-maps';
 
 import * as React from 'react';
@@ -35,6 +36,26 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const [activeDeliveryId, setActiveDeliveryId] = useRecoilState(
     State.Atoms.activeDeliveryIdState,
   );
+  const [userLongitude, setUserLongitude] = React.useState<number>();
+  const [userLatitude, setUserLatitude] = React.useState<number>();
+
+  React.useEffect(() => {
+    Utils.requestAndroidLocationPermission()?.then(status => {
+      if (status === PermissionsAndroid.RESULTS.GRANTED) {
+        Geolocation.getCurrentPosition(
+          position => {
+            setUserLongitude(position?.coords?.longitude);
+            setUserLatitude(position?.coords?.latitude);
+          },
+          error => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+          },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    });
+  }, []);
 
   const handleMakeActive = () => {
     if (selectedDelivery !== null) {
@@ -123,6 +144,8 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           handlePress={handleOpenInMaps}
           marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
         />
+        <Text>User longitude: {userLongitude}</Text>
+        <Text>User latitude: {userLatitude}</Text>
         {getActions()}
       </Components.Section>
     </Components.Screen>
