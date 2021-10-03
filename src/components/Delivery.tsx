@@ -17,23 +17,15 @@ const styles = StyleSheet.create({
     fontSize: Res.Constants.Dimensions.ITEM_TITLE_FONT_SIZE,
     fontWeight: 'bold',
   },
-  deliveryTextContent: {},
-  activeLabel: {
-    backgroundColor: '#77DD77',
-    width: 110,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
-    paddingVertical: 6,
-    marginTop: 16,
-    borderRadius: Res.Constants.Dimensions.BUTTON_RADIUS,
-  },
 });
 
 const Delivery: React.FunctionComponent<DeliveryProps> = (
   props: DeliveryProps,
 ) => {
   const [activeDeliveryId] = useRecoilState(State.Atoms.activeDeliveryIdState);
+  const [deliveredDeliveries] = useRecoilState(
+    State.Atoms.deliveredDeliveriesState,
+  );
 
   const handleTouchOnDelivery = () => {
     if (props.handleTouchOnDelivery !== undefined) {
@@ -48,20 +40,22 @@ const Delivery: React.FunctionComponent<DeliveryProps> = (
         style={styles.deliveryTitle}>
         {Utils.formatDeliveryId(props.delivery)}
       </Text>
-      <Text
-        testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}
-        style={styles.deliveryTextContent}>
+      <Text testID={Res.Constants.TestIds.Delivery.DeliveryCustomer}>
         {Utils.formatDeliveryCustomer(props.delivery)}
       </Text>
-      <Text
-        testID={Res.Constants.TestIds.Delivery.DeliveryAddress}
-        style={styles.deliveryTextContent}>
+      <Text testID={Res.Constants.TestIds.Delivery.DeliveryAddress}>
         {Utils.formatDeliveryAddress(props.delivery)}
       </Text>
       {activeDeliveryId === props.delivery.id && (
-        <View style={styles.activeLabel}>
-          <Text>Active</Text>
-        </View>
+        <Components.Label text={'Active'} />
+      )}
+      {deliveredDeliveries.filter(function (d) {
+        return d.deliveryId === props.delivery.id;
+      }).length > 0 && (
+        <Components.Label
+          text={'Delivered'}
+          backgroundColor={Res.Constants.Colors.Blue}
+        />
       )}
     </Components.Item>
   );
