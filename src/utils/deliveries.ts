@@ -37,4 +37,13 @@ const getDeliveredDeliveries = (
   );
 };
 
-export {getUndeliveredDeliveries, getDeliveredDeliveries};
+const isDelivered = (
+  deliveredDeliveries: State.Models.FinishedDelivery[],
+  deliveryId: string,
+) => {
+  return (
+    deliveredDeliveries.filter(dd => dd.deliveryId === deliveryId)?.length > 0
+  );
+};
+
+export {getUndeliveredDeliveries, getDeliveredDeliveries, isDelivered};
