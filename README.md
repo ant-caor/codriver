@@ -21,7 +21,7 @@ The RN CLI depends on Android SDK environment variables (follow instructions in 
 Execute the following command:
 
 ```bash
-    $ yarn run android
+    yarn run android
 ```
 
 ### Running on iOS
@@ -29,7 +29,7 @@ Execute the following command:
 Execute the following command:
 
 ```bash
-    $ yarn run ios
+    yarn run ios
 ```
 
 ## Run jest and react native testing library tests
@@ -37,7 +37,7 @@ Execute the following command:
 To run unit and react component tests, execute the following command:
 
 ```bash
-    $ yarn run test
+    yarn run test
 ```
 
 ## Codriver project structure
