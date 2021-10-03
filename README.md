@@ -39,3 +39,9 @@ To run unit and react component tests, execute the following command:
 ```bash
     $ yarn run test
 ```
+
+## Codriver project structure
+
+Codriver code is organized in 6 folders: api, components, res, screens, state and utils.
+
+Each folder has its own README file.
