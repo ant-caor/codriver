@@ -134,11 +134,10 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
   const getActions = () => {
     if (selectedDelivery?.id !== activeDeliveryId) {
       if (activeDeliveryId === '') {
-        const isDelivered =
-          deliveredDeliveries.filter(
-            dd => dd.deliveryId === selectedDelivery?.id,
-          )?.length > 0;
-        if (!isDelivered) {
+        if (
+          selectedDelivery?.id &&
+          !Utils.isDelivered(deliveredDeliveries, selectedDelivery?.id)
+        ) {
           // If this delivery is not delivered, is not active and there is not any active delivery then we can activate it.
           return (
             <Components.Button
@@ -184,10 +183,10 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
         </View>
       );
     } else {
-      const isDelivered =
-        deliveredDeliveries.filter(dd => dd.deliveryId === selectedDelivery?.id)
-          ?.length > 0;
-      if (isDelivered) {
+      if (
+        selectedDelivery?.id &&
+        Utils.isDelivered(deliveredDeliveries, selectedDelivery?.id)
+      ) {
         return (
           <View style={styles.imageContainer}>
             <Image
