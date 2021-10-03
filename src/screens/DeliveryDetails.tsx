@@ -222,6 +222,13 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
             </Text>
           </>
         )}
+        {selectedDelivery?.id &&
+          Utils.isDelivered(deliveredDeliveries, selectedDelivery?.id) && (
+            <Components.Label
+              text={'Delivered'}
+              backgroundColor={Res.Constants.Colors.Blue}
+            />
+          )}
         <Components.Button
           label={'Open in maps'}
           handlePress={handleOpenInMaps}
