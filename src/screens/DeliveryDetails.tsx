@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: '100%',
   },
+  driverInformation: {
+    marginBottom: Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS,
+  },
 });
 
 const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
@@ -108,6 +111,10 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
 
   return (
     <Components.Screen stackProps={props.stackProps} showBackButton={true}>
+      <Text style={styles.driverInformation}>
+        Current driver position: ({userLocation?.longitude},
+        {userLocation?.latitude})
+      </Text>
       <Components.Section
         title={'Delivery details'}
         titleTestId={Res.Constants.TestIds.DeliveryDetails.Title}>
@@ -131,8 +138,6 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
           handlePress={handleOpenInMaps}
           marginTop={Res.Constants.Dimensions.SPACE_BETWEEN_SECTIONS}
         />
-        <Text>User longitude: {userLocation?.longitude}</Text>
-        <Text>User latitude: {userLocation?.latitude}</Text>
         {getActions()}
       </Components.Section>
     </Components.Screen>
