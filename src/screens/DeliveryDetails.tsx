@@ -100,7 +100,7 @@ const DeliveryDetails: React.FunctionComponent<DeliveryDetailsProps> = (
         if (!deliveredDeliveries?.includes(finishedDelivery)) {
           setDeliveredDeliveries([...deliveredDeliveries, finishedDelivery]);
           setActiveDeliveryId('');
-          props.stackProps?.navigation?.goBack();
+          props?.stackProps?.navigation?.navigate('DeliveredDeliveries');
         }
       },
     );
