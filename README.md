@@ -10,7 +10,7 @@ It is really easy to use, with only 3 screens we can:
 - See the details of a delivery in the Delivery details screen.
 - See delivered deliveries on the Delivered deliveries screen.
 
-Probably as a driver you will use Codriver in places with a slow or non-existent internet connection, this is why with Codriver you can see your deliveries information being offline as it persists this information.
+Probably as a driver you will use Codriver in places with a slow or non-existent internet connection, this is why with Codriver you can see your deliveries information being offline as it persists all the data.
 
 ## Setting up the environment
 
