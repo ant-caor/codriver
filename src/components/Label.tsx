@@ -5,6 +5,7 @@ import * as Res from '../res';
 
 type LabelProps = {
   text: string;
+  textTestId?: string;
   backgroundColor?: string;
 };
 
@@ -26,7 +27,7 @@ const Label: React.FunctionComponent<LabelProps> = (props: LabelProps) => {
 
   return (
     <View style={styles.activeLabel}>
-      <Text>{props.text}</Text>
+      <Text testID={props.textTestId}>{props.text}</Text>
     </View>
   );
 };
