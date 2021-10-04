@@ -2,6 +2,16 @@
 
 Where drivers can manage smart deliveries.
 
+Codriver helps drivers to manage their active, unactive, and finished (delivered or undelivered) deliveries.
+
+It is really easy to use, with only 3 screens we can:
+
+- Manage active and pending deliveries on the Home screen.
+- See the details of a delivery in the Delivery details screen.
+- See delivered deliveries on the Delivered deliveries screen.
+
+Probably as a driver you will use Codriver in places with a slow or non-existent internet connection, this is why with Codriver you can see your deliveries information being offline as it persists this information.
+
 ## Setting up the environment
 
 This project is powered by React Native. To run this you need to follow the environment setup instructions. You can find them here:
