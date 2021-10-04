@@ -41,16 +41,10 @@ const DeliveredDeliveries: React.FunctionComponent<DeliveredDeliveriesPros> = (
 
   React.useEffect(() => {
     setLoading(true);
-    API.Calls.getDeliveries()
-      .then(deliveries => {
-        setDeliveries(deliveries);
-        setLoading(false);
-      })
-      .catch(err =>
-        console.log(
-          `[DeliveredDeliveries screen] Error getting deliveries: ${err}`,
-        ),
-      );
+    API.Calls.getDeliveries().then(deliveries => {
+      setDeliveries(deliveries);
+      setLoading(false);
+    });
   }, [setDeliveries]);
 
   const handleTouchOnDelivery = (id: string) => {
